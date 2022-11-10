@@ -8,9 +8,12 @@ import ethereum from '../img/ethereum.png'
 import blockchain from '../img/blockchain.png'
 
 import Style from "../styles/NavBar.module.css"
+import cors from "cors";
+import App from "next/app";
 
 
 const Navbar = () => {
+
     const [userAccount, setUserAccount] = useState('');
     const [Balance, setBalance] = useState('');
     const [count, setCount] = useState('');
@@ -22,14 +25,18 @@ const Navbar = () => {
     const getEtherPrice = async() => {
         try{
             const API_ETHER_KEY = "J7S6H859JJRE5RZ31C5I5E58I5GI3Y6DHX";
-            axios.get(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${API_ETHER_KEY}`).then(
-                (response)=>{
-                  console.log(response)
+            axios.get(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${API_ETHER_KEY}`)
+                .then((response)=>{
+                  setPrice(response.data.result);
+                  console.log(price);
                 })
         } catch (error) {
             console.log(error)
         }
     };
+    useEffect(() =>{
+        getEtherPrice();
+    }, []);
 
     return (
             <div>
