@@ -14,22 +14,39 @@ import App from "next/app";
 
 const Navbar = () => {
 
-    const [userAccount, setUserAccount] = useState('');
-    const [Balance, setBalance] = useState('');
-    const [count, setCount] = useState('');
+    const [userAccount, setUserAccount] = useState("");
+    const [Balance, setBalance] = useState("");
+    const [count, setCount] = useState("");
     const [openModele, setOpenModele] = useState(true);
     const [price, setPrice] = useState([]);
     const [etherSupply, setEtherSupply] = useState([]);
-    const [updatedPrice, setUpdatedPrice] = useState([]);
+    const [updatedPriceDate, setUpdatedPriceDate] = useState("");
 
     const getEtherPrice = async() => {
         try{
             const API_ETHER_KEY = "J7S6H859JJRE5RZ31C5I5E58I5GI3Y6DHX";
-            axios.get(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${API_ETHER_KEY}`)
+            axios.get(`https://api.etherscan.io/api/?module=stats&action=ethprice&apikey=${API_ETHER_KEY}`,{ crossDomain: true })
                 .then((response)=>{
                   setPrice(response.data.result);
-                  console.log(price);
-                })
+                  //console.log(response.data.result);
+                  // console.log(price);
+
+                  const timestamp = Number(response.data.result.ethusd_timestamp);
+                  //console.log(timestamp);
+
+                  const date = new Date(timestamp)
+                    setUpdatedPriceDate("Update:" +
+                        date.getHours() +
+                        ":" +
+                        date.getMinutes() +
+                        ":" +
+                        date.getSeconds()
+                    );
+                });
+           // console.log(updatedPriceDate);
+
+            axios.get(`https://api.etherscan.io/api?module=stats&action=ethsupply&apikey=YourApiKeyToken`)
+
         } catch (error) {
             console.log(error)
         }
