@@ -3,6 +3,7 @@ import Image from "next/image";
 import axios from "axios";
 import Link from "next/link";
 
+
 //IMPORT INTERNE
 import ethereum from '../img/ethereum.png'
 import blockchain from '../img/blockchain.png'
@@ -45,13 +46,35 @@ const Navbar = () => {
                 });
            // console.log(updatedPriceDate);
 
-            axios.get(`https://api.etherscan.io/api?module=stats&action=ethsupply&apikey=YourApiKeyToken`)
-
+            axios.get(`https://api.etherscan.io/api?module=stats&action=ethsupply&apikey=${API_ETHER_KEY}`)
+                .then((response)=>{
+                   setEtherSupply(response.data.result);
+                });
         } catch (error) {
             console.log(error)
         }
     };
+
+    //connexion api Metamask
+    // check si le compte existe
+
+    const checkIfAccountExist = async()=>{
+        try {
+            if(!window.ethereum) return console.log("Please install Metamask ");
+            const accounts = await window.ethereum.request({method: "eth_account"});
+            if (accounts.length) {
+                setUserAccount(accounts[0]);
+                console.log(userAccount);
+            }
+        }catch (error){
+            console.log(error);
+        }
+    };
+
+
+
     useEffect(() =>{
+        checkIfAccountExist();
         getEtherPrice();
     }, []);
 
