@@ -11,6 +11,8 @@ import blockchain from '../img/blockchain.png'
 import Style from "../styles/NavBar.module.css"
 import cors from "cors";
 import App from "next/app";
+import {log} from "util";
+
 
 
 const Navbar = () => {
@@ -46,7 +48,7 @@ const Navbar = () => {
                 });
            // console.log(updatedPriceDate);
 
-            axios.get(`https://api.etherscan.io/api?module=stats&action=ethsupply&apikey=${API_ETHER_KEY}`)
+            axios.get(`https://api.etherscan.io/api?module=stats&action=ethsupply&apikey=${API_ETHER_KEY}`, { crossDomain: true })
                 .then((response)=>{
                    setEtherSupply(response.data.result);
                 });
@@ -57,25 +59,53 @@ const Navbar = () => {
 
     //connexion api Metamask
     // check si le compte existe
+    // ça a l'air de marcher mais ça n'affiche pas l'adresse du wallet ? wtf
 
-    const checkIfAccountExist = async()=>{
+    const checkIfAccountExist = async () => {
         try {
-            if(!window.ethereum) return console.log("Please install Metamask ");
-            const accounts = await window.ethereum.request({method: "eth_account"});
+            if (!window.ethereum) return console.log("Please install Metamask ");
+
+            const accounts = await window.ethereum.request({
+                method: "eth_accounts",
+            });
             if (accounts.length) {
                 setUserAccount(accounts[0]);
-                console.log(userAccount);
             }
+            console.log(userAccount);
+
         }catch (error){
             console.log(error);
         }
     };
+
+    //CONNECTER LE WALLET
+    const connectwallet = async () => {
+
+        try {
+            if (!window.ethereum) return console.log("Please install Metamask ");
+
+            const accounts = await window.ethereum.request({
+                method: "eth_requestAccounts",
+            });
+
+            if(accounts.length){
+                setUserAccount(accounts[0]);
+            } else {
+                console.log('Sorry you do not have account');
+            }
+
+
+        } catch (error){
+            console.log("Something is wrong");
+        }
+    }
 
 
 
     useEffect(() =>{
         checkIfAccountExist();
         getEtherPrice();
+        connectwallet();
     }, []);
 
     return (
@@ -93,7 +123,16 @@ const Navbar = () => {
                         </Link>
                     </div>
                             <div className={Style.right}>
+                                {userAccount.length ?
 
+                                        (
+                                        <button onClick={()=> openUserInfo()}>
+                                            Acc: {userAccount.slice(0, 10)}...
+                                        </button>
+                                    ):(
+                                        ""
+                                    )
+                                }
                             </div>
                 </div>
             </div>
