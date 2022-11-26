@@ -2,13 +2,14 @@ import React, {useEffect, useState} from 'react'
 import Image from "next/image";
 import axios from "axios";
 import Link from "next/link";
-import {mdOutlineClose} from 'react-icons/md';
-
+import {MdOutlineClose} from 'react-icons/md';
+import {TbChartArrowsVertical} from 'react-icons/tb';
 
 //IMPORT INTERNE
 import ethereumm from '../img/ethereumm.png'
 import blockchain from '../img/blockchain.png'
 import user from '../img/avatar.png'
+
 
 import Style from "../styles/NavBar.module.css"
 
@@ -16,7 +17,7 @@ import Style from "../styles/NavBar.module.css"
 const Navbar = () => {
 
     const [userAccount, setUserAccount] = useState("");
-    const [Balance, setBalance] = useState("");
+    const [balance, setBalance] = useState("");
     const [count, setCount] = useState("");
     const [openModel, setOpenModel] = useState(true);
     const [price, setPrice] = useState([]);
@@ -125,7 +126,7 @@ const Navbar = () => {
                             <div>
                                 <h1 className={Style.desktop}>Blockchain Explorer</h1>
                                 <h1 className={Style.mobile}>
-                                    <Image src={blockchain} alt="logo" width={150} height={50}/>
+                                    <Image src={blockchain} width={150} height={50} alt={'cc'}/>
                                 </h1>
                             </div>
                         </Link>
@@ -137,28 +138,67 @@ const Navbar = () => {
                                     Acc: {userAccount.slice(0, 10)}...
                                 </button>
 
-                            {
-                                openModel ? (
-                                    <div className={Style.userModal}>
-                                        <div className={Style.user_box}>
-                                            <div className={Style.closeBtn}>
-                                                <mdOutlineClose onClick={() => openUserInfo()}/>
+                                {
+                                    openModel ? (
+                                        <div className={Style.userModal}>
+                                            <div className={Style.user_box}>
+                                                <div className={Style.closeBtn}>
+                                                    <MdOutlineClose onClick={() => openUserInfo()}/>
+                                                </div>
+                                                <Image src={user} alt={user} width={50} height={50}/>
+                                                <p>Acc: &nbsp; {userAccount}</p>
+                                                <p>Balance: &nbsp; {balance} ETH</p>
+                                                <p>Total Transaction: &nbsp; count ETH</p>
                                             </div>
-                                            <Image src={user} alt={User} width={50} height={50}/>
-                                            <p>Acc: &nbsp; {userAccount}</p>
-                                            <p>Balance: &nbsp; {balance} ETH</p>
-                                            <p>Total Transaction: &nbsp; count ETH</p>
                                         </div>
-                                    </div>
-                                ) : (
-                                    ""
-                                )}
-                                    </div>
-                            ) : (
-                            <button onClick={()=> connectwallet()}>Connect Wallet</button>
-                            )}
-                        </div>
+                                    ) : (
+                                        ""
+                                    )}
+                            </div>
+                        ) : (
+                            <button onClick={() => connectwallet()}>Connect Wallet</button>
+                        )}
+                    </div>
                 </div>
+            </div>
+            <div className={Style.price}>
+                <div className={Style.price__box}>
+                    <div className={Style.etherPrice}>
+                        <div>
+                            <Image src={ethereumm} width={30} height={30} alt={'cc'}/>
+                        </div>
+                            <div>
+                                <h1>ETHER PRICE</h1>
+                                <p>$ 292929</p>
+                                <p>BTC 76676</p>
+                                <p>Updated Price</p>
+                            </div>
+                    </div>
+                            <div className={Style.supplyEther}>
+                                <div>
+                                    <TbChartArrowsVertical className={Style.supplyIcon}/>
+                                </div>
+                                <div>
+                                    <h4>TOTAL ETHER SUPPLY</h4>
+                                    <p>$ 292929</p>
+                                    <p>BTC 76676</p>
+                                    <p>Updated Price</p>
+                                </div>
+                            </div>
+                </div>
+                    <div className={Style.price__box}>
+                        <div className={Style.tokenBox__logo}>
+                            <Image src={ethereumm} height={200} width={200} alt={'cc'}/>
+                        </div>
+
+                        <div className={Style.logoWidth}>
+                            <p>ERC20 TOKEN</p>
+                            <p>ERC21 TOKEN</p>
+                            <p>ERC1155 TOKEN</p>
+                            <p>CONTRACT</p>
+
+                        </div>
+                    </div>
             </div>
         </div>
     );
