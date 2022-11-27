@@ -29,7 +29,7 @@
     color: #9a02ac;
 }
 
-.monbile{
+.mobile{
     display: none;
 }
 
@@ -158,12 +158,12 @@
  */
 
 
-@media screen and(max-width: 45em) {
+@media screen and (max-width: 45em) {
     .navbar{
         width: 100%;
-        margin-right: 0rem;
-        padding: 0rem;
-        border-radius: 0rem;
+        margin-right: 0;
+        padding: 0;
+        border-radius: 0;
     }
     .navbar__container{
         padding: 1rem 2rem;
@@ -210,12 +210,9 @@
     }
 
     .userModal{
-        right: -6rem;
-    }
-
-    .userModal{
         right: .5rem;
     }
+
 
 
 }
