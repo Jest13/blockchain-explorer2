@@ -1,8 +1,11 @@
 import '../styles/globals.css'
+
+import {EtherProvider, Etherscan} from "../Context/Ether";
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
 
 const MyApp = ({ Component, pageProps }) => (
+    <EtherProvider>
   <div>
     <Navbar/>
       <div>
@@ -10,6 +13,7 @@ const MyApp = ({ Component, pageProps }) => (
       </div>
     <Footer/>
   </div>
+    </EtherProvider>
 
 );
 

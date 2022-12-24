@@ -1,22 +1,21 @@
 import React, {useEffect, useState, useContext} from 'react'
-import { useRouter} from "next/router";
+import {useRouter} from "next/router";
 import Image from "next/image";
-import { ethers } from "ethers";
+import {ethers} from "ethers";
 import Link from "next/link";
-import { SiMinutemailer} from "react-icons/all";
+import {SiMinutemailer} from "react-icons/all";
 
 // IMPORT INTERNE
 
+import {Etherscan} from "../Context/Ether";
 import Style from "../styles/index.module.css";
 import ethereumm from "../img/ethereumm.png";
 
 const index = () => {
-  return (
-      <div>
-        <p>Home</p>
-      </div>
-  )
-}
+    const {data} = useContext(Etherscan);
+    return <div><h1>{data}</h1></div>;
+
+};
 
 
 export default index;
