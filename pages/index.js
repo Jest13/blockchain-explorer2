@@ -12,8 +12,42 @@ import Style from "../styles/index.module.css";
 import ethereumm from "../img/ethereumm.png";
 
 const index = () => {
-    const {data} = useContext(Etherscan);
-    return <div><h1>{data}</h1></div>;
+    const router = useRouter();
+    const {data, yourBlockTrans} = useContext(Etherscan);
+
+    const [userAccount, setUserAccount] = useState('');
+
+    return <div>
+        <div className={Style.header}>
+            <form className={Style.accountAddress}>
+                <input type="text" placeholder={"Ether Account address"} id={"accountAddress"}/>
+                <Link href={{pathname: "/account", query: userAccount}}>
+                    <a>
+                        <SiMinutemailer/>
+                    </a>
+                </Link>
+            </form>
+        </div>
+
+        // MAIN SCTION HOME PAGE
+
+        <div className={Style.container}>
+            <div className={Style.container__box}>
+                <h3>Latest Blocks</h3>
+                <div className={Style.container__block}>
+                    {yourBlockTrans.map((el, i) => (
+                        <div className={Style.oneBlock} key={i + 1}>
+                            <div className={Style.block}>
+                                <div className={Style.info}>
+
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </div>;
 
 };
 
