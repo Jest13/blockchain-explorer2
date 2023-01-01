@@ -10,7 +10,7 @@ export const EtherProvider = ({ children }) => {
     const tenBlockWithDetails = [];
     const [yourBlockTrans, setYourBlockTrans] = useState(tenBlockWithDetails);
     const [currentBlock, setCurrentBlock] = useState([]);
-    const [topTenBlock, SetTopTenBlock] = useState([]);
+    const [topTenBlock, setTopTenBlock] = useState([]);
     const [transaction, setTransaction] = useState([]);
     const [gasPrice, setGasPrice] = useState("");
 
@@ -33,11 +33,13 @@ export const EtherProvider = ({ children }) => {
 
             //GET BLOCK DETAILS
             const getBlockDetails = listTenBlock.flat();
-            console.log(getBlockDetails);
+            setTopTenBlock(getBlockDetails);
 
             getBlockDetails.map(async (el)=>{
                 const singleBlockData = await provider.getBlock(el);
-                tenBlockWithDetails.push()
+                tenBlockWithDetails.push(singleBlockData);
+                console.log(singleBlockData);
+
             })
 
         } catch (error) {
