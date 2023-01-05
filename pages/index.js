@@ -17,6 +17,8 @@ const index = () => {
 
     const [userAccount, setUserAccount] = useState('');
 
+    console.log(yourBlockTrans);
+
     return <div>
         <div className={Style.header}>
             <form className={Style.accountAddress}>
@@ -39,7 +41,9 @@ const index = () => {
                         <div className={Style.oneBlock} key={i + 1}>
                             <div className={Style.block}>
                                 <div className={Style.info}>
-
+                                    <p className={Style.bk}>bk</p>
+                                    <Link href={{pathname: "/block", query: el.number}}
+                                    ></Link>
                                 </div>
                             </div>
                         </div>
