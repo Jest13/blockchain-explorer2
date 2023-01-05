@@ -17,42 +17,51 @@ const index = () => {
 
     const [userAccount, setUserAccount] = useState('');
 
-    console.log(yourBlockTrans);
+    return (
+        <div>
+            <div className={Style.header}>
+                <form className={Style.accountAddress}>
+                    <input type="text" placeholder="Ether Account address" id="accountAddress"/>
+                    <Link href={{pathname: "/account", query: userAccount}}>
+                            <SiMinutemailer/>
+                    </Link>
+                </form>
+            </div>
 
-    return <div>
-        <div className={Style.header}>
-            <form className={Style.accountAddress}>
-                <input type="text" placeholder={"Ether Account address"} id={"accountAddress"}/>
-                <Link href={{pathname: "/account", query: userAccount}}>
-                    <a>
-                        <SiMinutemailer/>
-                    </a>
-                </Link>
-            </form>
-        </div>
+            <div className={Style.container}>
+                <div className={Style.container__box}>
+                    <h3>Latest Blocks</h3>
+                    <div className={Style.container__block}>
 
-        // MAIN SCTION HOME PAGE
-
-        <div className={Style.container}>
-            <div className={Style.container__box}>
-                <h3>Latest Blocks</h3>
-                <div className={Style.container__block}>
-                    {yourBlockTrans.map((el, i) => (
+                        {yourBlockTrans.map((el, i) => (
                         <div className={Style.oneBlock} key={i + 1}>
                             <div className={Style.block}>
                                 <div className={Style.info}>
-                                    <p className={Style.bk}>bk</p>
+                                    <p>BBBBBBBBBBBBBBBk</p>
                                     <Link href={{pathname: "/block", query: el.number}}
-                                    ></Link>
+                                    >{el.number}
+                                    </Link>
+                                </div>
+                                <p>{el.timestamp}</p>
+                            </div>
+                            <div>
+                                <div className={Style.miner}>
+                                    <p>
+                                        <samp>Miner: &nbsp;&nbsp;
+                                        <Link className={Style.link} href={{pathname: '/account/', query:el.miner}}>
+                                           <a> {el.miner.slice(0, 35)}...</a>
+                                        </Link>
+                                        </samp>
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     ))}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>;
-
+);
 };
 
 
