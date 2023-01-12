@@ -14,7 +14,7 @@ import user from '../img/avatar.png'
 import Style from "../styles/NavBar.module.css"
 
 
-const Navbar = () => {
+const Navbar = (url, config) => {
 
     const [userAccount, setUserAccount] = useState("");
     const [balance, setBalance] = useState("");
@@ -35,8 +35,9 @@ const Navbar = () => {
 
     const getEtherPrice = async () => {
         try {
+
             const API_ETHER_KEY = "J7S6H859JJRE5RZ31C5I5E58I5GI3Y6DHX";
-            axios.get(`https://api.etherscan.io/api/?module=stats&action=ethprice&apikey=${API_ETHER_KEY}`, {crossDomain: false})
+            axios.get(`https://api.etherscan.io/api/?module=stats&action=ethprice&apikey=${API_ETHER_KEY}`)
                 .then((response) => {
                     setPrice(response.data.result);
                     //console.log(response.data.result);
@@ -56,7 +57,7 @@ const Navbar = () => {
                 });
             // console.log(updatedPriceDate);
 
-            axios.get(`https://api.etherscan.io/api?module=stats&action=ethsupply&apikey=${API_ETHER_KEY}`, {crossDomain: false})
+            axios.get(`https://api.etherscan.io/api?module=stats&action=ethsupply&apikey=${API_ETHER_KEY}`)
                 .then((response) => {
                     setEtherSupply(response.data.result);
                 });
@@ -71,6 +72,7 @@ const Navbar = () => {
 
     const checkIfAccountExist = async () => {
         try {
+
             if (!window.ethereum) return console.log("Please install Metamask ");
 
             const accounts = await window.ethereum.request({
@@ -167,38 +169,38 @@ const Navbar = () => {
                         <div>
                             <Image src={ethereumm} width={30} height={30} alt={'cc'}/>
                         </div>
-                            <div>
-                                <h1>ETHER PRICE</h1>
-                                <p>$ 292929</p>
-                                <p>BTC 76676</p>
-                                <p>Updated Price</p>
-                            </div>
+                        <div>
+                            <h1>ETHER PRICE</h1>
+                            <p>$ 292929</p>
+                            <p>BTC 76676</p>
+                            <p>Updated Price</p>
+                        </div>
                     </div>
-                            <div className={Style.supplyEther}>
-                                <div>
-                                    <TbChartArrowsVertical className={Style.supplyIcon}/>
-                                </div>
-                                <div>
-                                    <h4>TOTAL ETHER SUPPLY</h4>
-                                    <p>$ 292929</p>
-                                    <p>BTC 76676</p>
-                                    <p>Updated Price</p>
-                                </div>
-                            </div>
+                    <div className={Style.supplyEther}>
+                        <div>
+                            <TbChartArrowsVertical className={Style.supplyIcon}/>
+                        </div>
+                        <div>
+                            <h4>TOTAL ETHER SUPPLY</h4>
+                            <p>$ 292929</p>
+                            <p>BTC 76676</p>
+                            <p>Updated Price</p>
+                        </div>
+                    </div>
                 </div>
-                    <div className={Style.price__box}>
-                        <div className={Style.tokenBox__logo}>
-                            <Image src={ethereumm} height={200} width={200} alt={'cc'}/>
-                        </div>
-
-                        <div className={Style.logoWidth}>
-                            <p>ERC20 TOKEN</p>
-                            <p>ERC21 TOKEN</p>
-                            <p>ERC1155 TOKEN</p>
-                            <p>CONTRACT</p>
-
-                        </div>
+                <div className={Style.price__box}>
+                    <div className={Style.tokenBox__logo}>
+                        <Image src={ethereumm} height={200} width={200} alt={'cc'}/>
                     </div>
+
+                    <div className={Style.logoWidth}>
+                        <p>ERC20 TOKEN</p>
+                        <p>ERC21 TOKEN</p>
+                        <p>ERC1155 TOKEN</p>
+                        <p>CONTRACT</p>
+
+                    </div>
+                </div>
             </div>
         </div>
     );
