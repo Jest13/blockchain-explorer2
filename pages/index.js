@@ -48,15 +48,15 @@ const index = () => {
                 <div className={Style.container__box}>
                     <h3>Latest Blocks</h3>
                     <div className={Style.container__block}>
-
                         {yourBlockTrans.map((el, i) => (
                             <div className={Style.oneBlock} key={i + 1}>
                                 <div className={Style.block}>
-
-                                    <p>Bk</p>
-                                    <Link href={{pathname: "/block", query: el.number}}
-                                    >{el.number}
-                                    </Link>
+                                    <div className={Style.info}>
+                                        <p className={Style.bk}>Bk</p>
+                                        <Link href={{pathname: "/block", query: el.number}}>
+                                            {el.number}
+                                        </Link>
+                                    </div>
 
                                     <p>{el.timestamp}</p>
                                 </div>
@@ -93,16 +93,16 @@ const index = () => {
                 <div className={Style.container__box}>
                     <h3>Latest Transaction</h3>
                     <div className={Style.container__block}>
-                        {transaction.map((el, i) =>(
+                        {transaction.map((el, i) => (
                             <div className={Style.oneBlock} key={i + 1}>
                                 <div>
                                     <div className={Style.info}>
                                         <div>
                                             <p className={Style.bx}>TS</p>
                                         </div>
-                                        <Link href={{ pathname: "/transaction", query: el }}>
+                                        <Link href={{pathname: "/transaction", query: el}}>
                                             Hash:&nbsp; {el.slice(0, 55)}..
-                                    </Link>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
