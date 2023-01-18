@@ -50,6 +50,7 @@ const index = () => {
                     <div className={Style.container__block}>
                         {yourBlockTrans.map((el, i) => (
                             <div className={Style.oneBlock} key={i + 1}>
+                                <p></p>
                                 <div className={Style.block}>
                                     <div className={Style.info}>
                                         <p className={Style.bk}>Bk</p>
