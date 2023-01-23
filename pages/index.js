@@ -73,7 +73,7 @@ const index = () => {
                                         </p>
                                         <samp>
                                             <Link href={{pathname: "/account", query: el.number}}>
-                                                {el.transaction.length}
+                                                {el.transactions.length}
                                             </Link>
                                             &nbsp;TNS in 3Sec
                                         </samp>
